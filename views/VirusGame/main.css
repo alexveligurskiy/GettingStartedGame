@@ -1,0 +1,145 @@
+ul.cell {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+ul.cell > li {
+    width: 50px; 
+    height: 50px;
+    display: block;
+    border: 1px solid;
+    float: left;
+    background: center center no-repeat;
+    background-color: white;
+}
+
+ul.cell > li.first-p {
+    background-image: url('img/X-1.svg');
+}
+ul.cell > li.first_z-p {
+    background-image: url('img/X-1-z.png');
+}
+ul.cell > li.second-p {
+    background-image: url('img/X-1.svg'); 
+}
+ul.cell > li.second_z-p {
+    background-image: url('img/X-1-z.png');
+}
+
+ul.cell > li.first-r {
+    background-image: url('img/X-2.svg');
+}
+ul.cell > li.first_z-r {
+    background-image: url('img/X-2-z.png');
+}
+ul.cell > li.second-r {
+    background-image: url('img/X-2.svg'); 
+}
+ul.cell > li.second_z-r {
+    background-image: url('img/X-2-z.png');
+}
+
+ul.cell > li.first-y {
+    background-image: url('img/X-3.svg');
+}
+ul.cell > li.first_z-y {
+    background-image: url('img/X-3-z.png');
+}
+ul.cell > li.second-y {
+    background-image: url('img/X-3.svg'); 
+}
+ul.cell > li.second_z-y {
+    background-image: url('img/X-3-z.png');
+}
+
+ul.cell > li.first-g {
+    background-image: url('img/X-4.svg');
+}
+ul.cell > li.first_z-g {
+    background-image: url('img/X-4-z.png');
+}
+ul.cell > li.second-g {
+    background-image: url('img/X-4.svg'); 
+}
+ul.cell > li.second_z-g {
+    background-image: url('img/X-4-z.png');
+}
+
+ul.cell > li.available {
+    background-color: lightgreen;
+}
+ul.cell > li.wall {
+    background-color: black;
+}
+#field{
+    margin: 0 auto; 
+    width: 550px; 
+    text-align: center;
+    visibility: visible;
+    
+}
+#player{
+    color: black;
+}
+.btn btn-primary{
+    
+}
+
+#colorChooser1{
+    visibility: hidden;
+}
+#colorChooser2{
+    visibility: hidden;
+}
+#chooseMap{
+    margin: 0 auto; 
+    width: 1000px;
+    height: 250px;
+    position: relative;
+    background-color: darkgray;
+}
+.map1{
+    width: 200px;
+    height: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 10px;
+    position: absolute;
+    background-color:darkkhaki;
+}
+.map2{
+    width: 200px;
+    height: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 10px;
+    position: absolute;
+    background-color:darkkhaki;
+}
+.map3{
+    width: 200px;
+    height: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 10px;
+    position: absolute;
+    background-color:darkkhaki;
+}
+.map4{
+    width: 200px;
+    height: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 10px;
+    position: absolute;
+    background-color:darkkhaki;
+}
+.map5{
+    width: 200px;
+    height: 200px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 10px;
+    position: absolute;
+    background-color:darkkhaki;
+}

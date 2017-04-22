@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            font-family: Areal;
+        }
+        .b-container{
+            width:200px;
+            height:50px;
+            background-color: #ccc;
+            text-align: center;
+            margin:0px auto;
+            padding:0px;
+            border-radius:5px;
+            font-size:30px;
+            color: #fff;
+            box-shadow: 0px 0px 10px #000;
+        }
+        .b-popup{
+            width:100%;
+            min-height:100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow:hidden;
+            position:fixed;
+            top:0px;
+        }
+        .b-popup .b-popup-content{
+            margin:40px auto 0px auto;
+            width:800px;
+            height: 200px;
+            padding:10px;
+            background-color: #c5c5c5;
+            border-radius:5px;
+            box-shadow: 0px 0px 10px #000;
+        }
+        ul.cell {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        ul.cell > li {
+            width: 50px; 
+            height: 50px;
+            display: block;
+            border: 5px solid;
+            border-color:black;
+            float: left;
+            background: center center no-repeat;
+            background-color: white;
+        }
+
+        ul.cell > li.first-p {
+            
+            background-color: #660066 ;
+            opacity:0.4;
+        }
+        ul.cell > li.first_z-p {
+            background-color: #660066;
+            
+        }
+        ul.cell > li.second-p {
+            background-image: url('img/X-1.svg'); 
+        }
+        ul.cell > li.second_z-p {
+            background-image: url('img/X-1-z.png');
+        }
+
+        ul.cell > li.first-r {
+            background-color: #ff0000;
+            opacity:0.4;
+            
+        }
+        ul.cell > li.first_z-r {
+            background-color: #ff0000;
+            
+        }
+        ul.cell > li.second-r {
+            background-image: url('img/X-2.svg'); 
+        }
+        ul.cell > li.second_z-r {
+            background-image: url('img/X-2-z.png');
+        }
+
+        ul.cell > li.first-y {
+            background-image: url('img/X-3.svg');
+        }
+        ul.cell > li.first_z-y {
+            background-image: url('img/X-3-z.png');
+        }
+        ul.cell > li.second-y {
+            background-image: url('img/X-3.svg'); 
+        }
+        ul.cell > li.second_z-y {
+            background-image: url('img/X-3-z.png');
+        }
+
+        ul.cell > li.first-g {
+            background-image: url('img/X-4.svg');
+        }
+        ul.cell > li.first_z-g {
+            background-image: url('img/X-4-z.png');
+        }
+        ul.cell > li.second-g {
+            background-image: url('img/X-4.svg'); 
+        }
+        ul.cell > li.second_z-g {
+            background-image: url('img/X-4-z.png');
+        }
+
+        ul.cell > li.available {
+            border-color:#009900;
+            opacity:0.5;
+        }
+        ul.cell > li.wall {
+            background-color: black;
+        }
+        #field{
+            margin: 0 auto; 
+            width: 550px; 
+            text-align: center;
+            visibility: visible;
+
+        }
+        #player{
+            color: black;
+        }
+        .btn btn-primary{
+
+        }
+
+        #colorChooser1{
+            visibility: hidden;
+        }
+        #colorChooser2{
+            visibility: hidden;
+        }
+        #chooseMap{
+            margin: 0 auto; 
+            width: 1000px;
+            height: 250px;
+            position: relative;
+            background-color: darkgray;
+        }
+        .map1{
+            width: 200px;
+            height: 200px;
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: 10px;
+            position: absolute;
+            background-color:darkkhaki;
+        }
+        .map2{
+            width: 200px;
+            height: 200px;
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: 10px;
+            position: absolute;
+            background-color:darkkhaki;
+        }
+        .map3{
+            width: 200px;
+            height: 200px;
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: 10px;
+            position: absolute;
+            background-color:darkkhaki;
+        }
+        .map4{
+            width: 200px;
+            height: 200px;
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: 10px;
+            position: absolute;
+            background-color:darkkhaki;
+        }
+        .map5{
+            width: 200px;
+            height: 200px;
+            margin-left: 8px;
+            margin-right: 8px;
+            margin-top: 10px;
+            position: absolute;
+            background-color:darkkhaki;
+        }
+    </style>
+</head>
+<body>
+    <div class="b-container">Open
+        <a href="javascript:PopUpShow()">Rules</a>
+    </div>
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
+            Играют в игру два игрока на доске n на n клеток, крестиками разных цветов.
+Ходят поочерёдно. Начинает первый игрок. Каждый ход состоит из трёх отдельных последовательных ходов (назовём их «ходиками»).
+Каждый «ходик» является либо размножением, либо убийством. Размножение — это выставление своего символа в любую доступную пустую клетку доски, а убийство — это объявление убитым некоторого чужого символа, который находится на доступной клетке.
+Клетка считается доступной для крестиков, если она либо непосредственно соприкасается (по вертикали, горизонтали) с живым крестиком, либо через цепочку убитых крестиков другого игрока(но не через цепочку убитых крестиков первого грока!).
+Аналогично определяются клетки, доступные для второго игрока.
+Убитые крестики 1 игрока закрашиваються цветом крестиков второго игрока.
+Целью игры является полное уничтожение колонии противника (то есть убить всех вражеских символов). Выигравшим считается игрок, сделавший последний ход; в таком варианте ничьей не существует.
+
+        <a href="javascript:PopUpHide()">Close</a>
+        </div>
+    </div>
+     <div id="field">   
+        <h3>
+            Round: <span id="turn">1</span> Steps left: <span id="steps_remains">3</span>
+            <br />
+            Player: <span id="player">First</span>
+        </h3>
+        <ul class="cell"></ul>
+        
+    </div>
+    <script>
+        
+        $(function(){
+            var cells = [];
+
+            var CELL_AVAILABLE_CLASS = 'available';
+            var CELL_WALL_CLASS = 'wall';
+
+            var whichMap = Math.floor((Math.random() * 5) +1);
+            var colorFirst = 0;
+            var colorSecond = 0;
+            var a;
+            var az;
+            var b;
+            var bz;
+                a = 'first-p',
+                az = 'first_z-p'
+
+                b = 'first-r',
+                bz = 'first_z-r'
+
+            var CellStatus = {
+
+                EMPTY : 'empty',
+                FIRST : a,
+                FIRST_Z : az,
+                SECOND : b,
+                SECOND_Z : bz
+            };
+            var imgPaths = {
+                purple: "img/X-1.svg",
+                purple_z:"img/X-1-z.png",
+                red: "img/X-2.svg",
+                red_z: "img/X-2-z.png",
+                yellow:"img/X-3.svg",
+                yellow_z:"img/X-3-z.png",
+                green:"img/X-4.svg",
+                green_z:"img/X-4-z.png"
+            }
+            var Cell = function(){
+                this.available = 0;
+                this.status = CellStatus.EMPTY;
+                this.element = null;
+            };
+            var Game = function(){
+
+                this.turn = 1;
+                this.step = 1;
+                this.stepHelp = 0;
+                this.player = 'first';
+                this.cellsChecked = [];
+            };
+
+
+            Cell.prototype.setAvailable = function(){
+                this.available = 1;
+                this.element.addClass(CELL_AVAILABLE_CLASS);
+            };
+
+            Cell.prototype.setNotAvailable = function(){
+                this.available = 0;
+                this.element.removeClass(CELL_AVAILABLE_CLASS);
+            };
+            Cell.prototype.setWall = function(){
+                this.available = 0;
+                this.element.addClass(CELL_WALL_CLASS);
+
+            };
+
+            Cell.prototype.setStatus = function(status){
+                this.status = status;
+                for(var p in CellStatus){
+                    this.element.removeClass(CellStatus[p]);
+                }
+                this.element.addClass(status);
+            };
+
+
+            Game.prototype.init = function(){
+
+                fillField(11);
+                this.calcAvailability();
+            };
+            Game.prototype.firstStep = function(){
+                this.cellsChecked = [];
+                this.stepHelp++;
+                $('#steps_remains').html(1-this.stepHelp+1);
+                if(this.stepHelp > 1){
+                    this.nextTurn();
+                }
+                this.calcAvailability();
+            };
+            Game.prototype.nextStep = function(){
+                this.cellsChecked = [];
+                this.step++;
+                $('#steps_remains').html(3-this.step+1);
+                if(this.step > 3){
+                    this.nextTurn();
+                }
+                this.calcAvailability();
+            };
+
+            Game.prototype.nextTurn = function(){
+                if(this.player == 'second'){
+                    this.turn++;
+                    $('#turn').html(this.turn);
+                }
+                this.step = 1;
+                $('#steps_remains').html(3);
+                if(this.player === 'first'){
+                    this.player = 'second';
+                    $('#player').html('Second');
+                    //$('#player').css({color:'red'});
+                }else{
+                    this.player = 'first';
+                    $('#player').html('First');
+                    //$('#player').css({color:'black'});
+                }
+            };
+
+            Game.prototype.actionBorn = function(cell){
+                if(this.player == 'first'){
+                    cell.setStatus(CellStatus.FIRST);
+                }else{
+                    cell.setStatus(CellStatus.SECOND);
+                }
+            };
+
+            Game.prototype.actionAbsorb = function(cell){
+                if(this.player == 'first'){
+                    cell.setStatus(CellStatus.FIRST_Z);
+                }else{
+                    cell.setStatus(CellStatus.SECOND_Z);
+                }
+            };
+
+            Game.prototype.checkAvailability = function(x,y){
+                /////////////
+
+                var maps = {
+                "firstMap" : function(){
+                    cells[2][cells[y].length-9].setNotAvailable();
+                    cells[2][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-8].setNotAvailable();
+                    cells[2][cells[y].length-8].setWall();
+
+                    cells[2][cells[y].length-7].setNotAvailable();
+                    cells[2][cells[y].length-7].setWall();
+
+                    cells[2][cells[y].length-4].setNotAvailable();
+                    cells[2][cells[y].length-4].setWall();
+
+                    cells[3][cells[y].length-8].setNotAvailable();
+                    cells[3][cells[y].length-8].setWall();
+
+                    cells[5][cells[y].length-3].setNotAvailable();
+                    cells[5][cells[y].length-3].setWall();
+
+                    cells[6][cells[y].length-4].setNotAvailable();
+                    cells[6][cells[y].length-4].setWall();
+
+                    cells[6][cells[y].length-3].setNotAvailable();
+                    cells[6][cells[y].length-3].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[6][cells[y].length-9].setNotAvailable();
+                    cells[6][cells[y].length-9].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-7].setNotAvailable();
+                    cells[7][cells[y].length-7].setWall();                    
+
+                    cells[8][cells[y].length-7].setNotAvailable();
+                    cells[8][cells[y].length-7].setWall();
+
+                    cells[8][cells[y].length-6].setNotAvailable();
+                    cells[8][cells[y].length-6].setWall(); 
+                }
+                , "secondMap" : function(){
+                    cells[2][cells[y].length-7].setNotAvailable();
+                    cells[2][cells[y].length-7].setWall();
+
+                    cells[2][cells[y].length-3].setNotAvailable();
+                    cells[2][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-4].setNotAvailable();
+                    cells[3][cells[y].length-4].setWall();
+
+                    cells[4][cells[y].length-9].setNotAvailable();
+                    cells[4][cells[y].length-9].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-5].setNotAvailable();
+                    cells[7][cells[y].length-5].setWall();
+
+                    cells[7][cells[y].length-6].setNotAvailable();
+                    cells[7][cells[y].length-6].setWall();
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall();
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall();                    
+
+                    cells[8][cells[y].length-5].setNotAvailable();
+                    cells[8][cells[y].length-5].setWall();
+                }
+                ,"thirdMap" : function(){
+                    cells[1][cells[y].length-9].setNotAvailable();
+                    cells[1][cells[y].length-9].setWall();
+
+                    cells[1][cells[y].length-5].setNotAvailable();
+                    cells[1][cells[y].length-5].setWall();
+
+                    cells[1][cells[y].length-9].setNotAvailable();
+                    cells[1][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-10].setNotAvailable();
+                    cells[2][cells[y].length-10].setWall();
+
+                    cells[2][cells[y].length-9].setNotAvailable();
+                    cells[2][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-3].setNotAvailable();
+                    cells[2][cells[y].length-3].setWall();
+
+                    cells[4][cells[y].length-4].setNotAvailable();
+                    cells[4][cells[y].length-4].setWall();
+
+                    cells[5][cells[y].length-4].setNotAvailable();
+                    cells[5][cells[y].length-4].setWall();
+
+                    cells[5][cells[y].length-3].setNotAvailable();
+                    cells[5][cells[y].length-3].setWall();
+
+                    cells[5][cells[y].length-5].setNotAvailable();
+                    cells[5][cells[y].length-5].setWall();
+
+                    cells[6][cells[y].length-9].setNotAvailable();
+                    cells[6][cells[y].length-9].setWall();
+
+                    cells[6][cells[y].length-4].setNotAvailable();
+                    cells[6][cells[y].length-4].setWall();                    
+
+                    cells[8][cells[y].length-2].setNotAvailable();
+                    cells[8][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-8].setNotAvailable();
+                    cells[7][cells[y].length-8].setWall(); 
+                }
+                ,"fourthMap":function(){
+                    cells[2][cells[y].length-8].setNotAvailable();
+                    cells[2][cells[y].length-8].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-4].setNotAvailable();
+                    cells[3][cells[y].length-4].setWall();
+
+                    cells[3][cells[y].length-5].setNotAvailable();
+                    cells[3][cells[y].length-5].setWall();
+
+                    cells[4][cells[y].length-4].setNotAvailable();
+                    cells[4][cells[y].length-4].setWall();
+
+                    cells[4][cells[y].length-5].setNotAvailable();
+                    cells[4][cells[y].length-5].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[6][cells[y].length-10].setNotAvailable();
+                    cells[6][cells[y].length-10].setWall();
+
+                    cells[7][cells[y].length-6].setNotAvailable();
+                    cells[7][cells[y].length-6].setWall();
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall();
+
+                    cells[7][cells[y].length-10].setNotAvailable();
+                    cells[7][cells[y].length-10].setWall();                    
+
+                    cells[8][cells[y].length-2].setNotAvailable();
+                    cells[8][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-8].setNotAvailable();
+                    cells[7][cells[y].length-8].setWall(); 
+                                }
+                ,"fifthMap":function(){
+                    cells[1][cells[y].length-8].setNotAvailable();
+                    cells[1][cells[y].length-8].setWall();
+
+                    cells[1][cells[y].length-10].setNotAvailable();
+                    cells[1][cells[y].length-10].setWall();
+
+                    cells[1][cells[y].length-4].setNotAvailable();
+                    cells[1][cells[y].length-4].setWall();
+
+                    cells[2][cells[y].length-6].setNotAvailable();
+                    cells[2][cells[y].length-6].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[4][cells[y].length-8].setNotAvailable();
+                    cells[4][cells[y].length-8].setWall();
+
+                    cells[5][cells[y].length-2].setNotAvailable();
+                    cells[5][cells[y].length-2].setWall();
+
+                    cells[5][cells[y].length-5].setNotAvailable();
+                    cells[5][cells[y].length-5].setWall();
+
+                    cells[5][cells[y].length-10].setNotAvailable();
+                    cells[5][cells[y].length-10].setWall();
+
+                    cells[7][cells[y].length-4].setNotAvailable();
+                    cells[7][cells[y].length-4].setWall();
+
+                    cells[7][cells[y].length-7].setNotAvailable();
+                    cells[7][cells[y].length-7].setWall();                    
+
+                    cells[9][cells[y].length-2].setNotAvailable();
+                    cells[9][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[9][cells[y].length-6].setNotAvailable();
+                    cells[9][cells[y].length-6].setWall(); 
+
+                }
+            }
+
+                ///////////////
+
+                function checkZombie(){
+                    if(typeof that.cellsChecked[neighbours[k].x] === 'undefined' || that.cellsChecked[neighbours[k].x][neighbours[k].y] !== 1){
+                        if(typeof that.cellsChecked[neighbours[k].x] === 'undefined') that.cellsChecked[neighbours[k].x] = [];
+                        that.cellsChecked[neighbours[k].x][neighbours[k].y] = 1;
+                        available_cnt += that.checkAvailability(neighbours[k].x,neighbours[k].y);
+                    }
+                }
+                var neighbours = [
+                    //те строки что закоментированы - откоментировать, чтобы добавить возможность ходит по диагонали!
+                    {x: x, y: y-1},
+                    {x: x, y: y+1},
+                    //{x: x-1, y: y-1},
+                    {x: x-1, y: y},
+                    //{x: x-1, y: y+1},
+                    //{x: x+1, y: y-1},
+                    {x: x+1, y: y},
+                    //{x: x+1, y: y+1}
+                ];
+                var available_cnt = 0;
+                var k = 0;
+                var that = this;
+                if(this.player == 'first'){
+                    for(k=0;k<neighbours.length;k++){
+                        if(
+                            typeof cells[neighbours[k].x] !== 'undefined'
+                                && typeof cells[neighbours[k].x][neighbours[k].y] !== 'undefined'
+                                && cells[neighbours[k].x][neighbours[k].y].status !== CellStatus.FIRST
+                                && cells[neighbours[k].x][neighbours[k].y].status !== CellStatus.SECOND_Z
+                            )
+                        {
+                            if(cells[neighbours[k].x][neighbours[k].y].status === CellStatus.FIRST_Z){
+                                checkZombie();
+                            }else{
+                                cells[neighbours[k].x][neighbours[k].y].setAvailable();
+
+                                if(whichMap==1){
+                                    maps.firstMap();
+                                }
+                             //   if(whichMap==2){
+                              //      maps.secondMap();
+                             //   }
+                                if(whichMap==3){
+                                    maps.thirdMap();
+                                }
+                                if(whichMap==4){
+                                    maps.fourthMap();
+                                }
+                                if(whichMap==5){
+                                    maps.fifthMap();
+                                }
+                                available_cnt++;
+                            }
+                        }
+                    }
+                }else{
+                    for(k=0;k<neighbours.length;k++){
+                        if(
+                            typeof cells[neighbours[k].x] !== 'undefined'
+                                && typeof cells[neighbours[k].x][neighbours[k].y] !== 'undefined'
+                                && cells[neighbours[k].x][neighbours[k].y].status !== CellStatus.SECOND
+                                && cells[neighbours[k].x][neighbours[k].y].status !== CellStatus.FIRST_Z
+                            )
+                        {
+                            if(cells[neighbours[k].x][neighbours[k].y].status === CellStatus.SECOND_Z){
+                                checkZombie();
+                            }else{
+                                cells[neighbours[k].x][neighbours[k].y].setAvailable();
+                                //////// добавлять карты сюда!!
+                                if(whichMap==1){
+                                    maps.firstMap();
+                                }
+                               // if(whichMap==2){
+                               //     maps.secondMap();
+                               // }
+                                if(whichMap==3){
+                                    maps.thirdMap();
+                                }
+                                if(whichMap==4){
+                                    maps.fourthMap();
+                                }
+                                if(whichMap==5){
+                                    maps.fifthMap();
+                                }
+                                available_cnt++;
+                            }
+                        }
+                    }
+                }
+                return available_cnt;
+            };
+
+            Game.prototype.calcAvailability = function(){
+                for(var x = 0;x < cells.length; x++){
+                    for(var y = 0;y < cells[x].length; y++){
+                        cells[x][y].setNotAvailable();
+
+                    }
+                }
+                ////////////
+               var maps = {
+                "firstMap" : function(){
+                    cells[2][cells[y].length-9].setNotAvailable();
+                    cells[2][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-8].setNotAvailable();
+                    cells[2][cells[y].length-8].setWall();
+
+                    cells[2][cells[y].length-7].setNotAvailable();
+                    cells[2][cells[y].length-7].setWall();
+
+                    cells[2][cells[y].length-4].setNotAvailable();
+                    cells[2][cells[y].length-4].setWall();
+
+                    cells[3][cells[y].length-8].setNotAvailable();
+                    cells[3][cells[y].length-8].setWall();
+
+                    cells[5][cells[y].length-3].setNotAvailable();
+                    cells[5][cells[y].length-3].setWall();
+
+                    cells[6][cells[y].length-4].setNotAvailable();
+                    cells[6][cells[y].length-4].setWall();
+
+                    cells[6][cells[y].length-3].setNotAvailable();
+                    cells[6][cells[y].length-3].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[6][cells[y].length-9].setNotAvailable();
+                    cells[6][cells[y].length-9].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-7].setNotAvailable();
+                    cells[7][cells[y].length-7].setWall();                    
+
+                    cells[8][cells[y].length-7].setNotAvailable();
+                    cells[8][cells[y].length-7].setWall();
+
+                    cells[8][cells[y].length-6].setNotAvailable();
+                    cells[8][cells[y].length-6].setWall(); 
+                }
+                , "secondMap" : function(){
+                    cells[2][cells[y].length-7].setNotAvailable();
+                    cells[2][cells[y].length-7].setWall();
+
+                    cells[2][cells[y].length-3].setNotAvailable();
+                    cells[2][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-4].setNotAvailable();
+                    cells[3][cells[y].length-4].setWall();
+
+                    cells[4][cells[y].length-9].setNotAvailable();
+                    cells[4][cells[y].length-9].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-2].setNotAvailable();
+                    cells[7][cells[y].length-2].setWall();
+
+                    cells[7][cells[y].length-5].setNotAvailable();
+                    cells[7][cells[y].length-5].setWall();
+
+                    cells[7][cells[y].length-6].setNotAvailable();
+                    cells[7][cells[y].length-6].setWall();
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall();
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall();                    
+
+                    cells[8][cells[y].length-5].setNotAvailable();
+                    cells[8][cells[y].length-5].setWall();
+                }
+                ,"thirdMap" : function(){
+                    cells[1][cells[y].length-9].setNotAvailable();
+                    cells[1][cells[y].length-9].setWall();
+
+                    cells[1][cells[y].length-5].setNotAvailable();
+                    cells[1][cells[y].length-5].setWall();
+
+                    cells[1][cells[y].length-9].setNotAvailable();
+                    cells[1][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-10].setNotAvailable();
+                    cells[2][cells[y].length-10].setWall();
+
+                    cells[2][cells[y].length-9].setNotAvailable();
+                    cells[2][cells[y].length-9].setWall();
+
+                    cells[2][cells[y].length-3].setNotAvailable();
+                    cells[2][cells[y].length-3].setWall();
+
+                    cells[4][cells[y].length-4].setNotAvailable();
+                    cells[4][cells[y].length-4].setWall();
+
+                    cells[5][cells[y].length-4].setNotAvailable();
+                    cells[5][cells[y].length-4].setWall();
+
+                    cells[5][cells[y].length-3].setNotAvailable();
+                    cells[5][cells[y].length-3].setWall();
+
+                    cells[5][cells[y].length-5].setNotAvailable();
+                    cells[5][cells[y].length-5].setWall();
+
+                    cells[6][cells[y].length-9].setNotAvailable();
+                    cells[6][cells[y].length-9].setWall();
+
+                    cells[6][cells[y].length-4].setNotAvailable();
+                    cells[6][cells[y].length-4].setWall();                    
+
+                    cells[8][cells[y].length-2].setNotAvailable();
+                    cells[8][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-8].setNotAvailable();
+                    cells[7][cells[y].length-8].setWall(); 
+                }
+                ,"fourthMap":function(){
+                    cells[2][cells[y].length-8].setNotAvailable();
+                    cells[2][cells[y].length-8].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[3][cells[y].length-4].setNotAvailable();
+                    cells[3][cells[y].length-4].setWall();
+
+                    cells[3][cells[y].length-5].setNotAvailable();
+                    cells[3][cells[y].length-5].setWall();
+
+                    cells[4][cells[y].length-4].setNotAvailable();
+                    cells[4][cells[y].length-4].setWall();
+
+                    cells[4][cells[y].length-5].setNotAvailable();
+                    cells[4][cells[y].length-5].setWall();
+
+                    cells[6][cells[y].length-2].setNotAvailable();
+                    cells[6][cells[y].length-2].setWall();
+
+                    cells[6][cells[y].length-10].setNotAvailable();
+                    cells[6][cells[y].length-10].setWall();
+
+                    cells[7][cells[y].length-6].setNotAvailable();
+                    cells[7][cells[y].length-6].setWall();
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall();
+
+                    cells[7][cells[y].length-10].setNotAvailable();
+                    cells[7][cells[y].length-10].setWall();                    
+
+                    cells[8][cells[y].length-2].setNotAvailable();
+                    cells[8][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-9].setNotAvailable();
+                    cells[7][cells[y].length-9].setWall(); 
+
+                    cells[7][cells[y].length-8].setNotAvailable();
+                    cells[7][cells[y].length-8].setWall(); 
+                                }
+                ,"fifthMap":function(){
+                    cells[1][cells[y].length-8].setNotAvailable();
+                    cells[1][cells[y].length-8].setWall();
+
+                    cells[1][cells[y].length-10].setNotAvailable();
+                    cells[1][cells[y].length-10].setWall();
+
+                    cells[1][cells[y].length-4].setNotAvailable();
+                    cells[1][cells[y].length-4].setWall();
+
+                    cells[2][cells[y].length-6].setNotAvailable();
+                    cells[2][cells[y].length-6].setWall();
+
+                    cells[3][cells[y].length-3].setNotAvailable();
+                    cells[3][cells[y].length-3].setWall();
+
+                    cells[4][cells[y].length-8].setNotAvailable();
+                    cells[4][cells[y].length-8].setWall();
+
+                    cells[5][cells[y].length-2].setNotAvailable();
+                    cells[5][cells[y].length-2].setWall();
+
+                    cells[5][cells[y].length-5].setNotAvailable();
+                    cells[5][cells[y].length-5].setWall();
+
+                    cells[5][cells[y].length-10].setNotAvailable();
+                    cells[5][cells[y].length-10].setWall();
+
+                    cells[7][cells[y].length-4].setNotAvailable();
+                    cells[7][cells[y].length-4].setWall();
+
+                    cells[7][cells[y].length-7].setNotAvailable();
+                    cells[7][cells[y].length-7].setWall();                    
+
+                    cells[9][cells[y].length-2].setNotAvailable();
+                    cells[9][cells[y].length-2].setWall();  
+
+                    cells[8][cells[y].length-9].setNotAvailable();
+                    cells[8][cells[y].length-9].setWall(); 
+
+                    cells[9][cells[y].length-6].setNotAvailable();
+                    cells[9][cells[y].length-6].setWall(); 
+
+                }
+            }
+
+                ////////////
+                if(this.turn == 1 && this.step == 1 && this.stepHelp == 0){
+                    for(y=0;y<cells.length;y++){
+                        if(this.player == 'first'){
+
+                            cells[0][y].setAvailable();
+                            cells[1][y].setAvailable();
+                            cells[2][y].setAvailable();
+                            cells[3][y].setAvailable();
+                            cells[4][y].setAvailable();
+                            //cells[5][y].setAvailable();
+                            //cells[6][y].setAvailable();
+                            //cells[7][y].setAvailable();
+                            //cells[8][y].setAvailable();
+                            //cells[9][y].setAvailable();
+                            //cells[10][y].setAvailable();
+
+                            if(whichMap == 1){
+                                maps.firstMap();
+                            }
+
+
+                           // if(whichMap == 2){
+                            //    maps.firstMap();
+                           // }
+                            if(whichMap==3){
+                                maps.thirdMap();
+                            }
+                            if(whichMap==4){
+                                maps.fourthMap();
+                            }
+                            if(whichMap==5){
+                                maps.fifthMap();
+                            }
+                        }else if(this.player == 'second'){
+
+
+                            //cells[0][y].setAvailable();
+                            //cells[1][y].setAvailable();
+                            //cells[2][y].setAvailable();
+                            //cells[3][y].setAvailable();
+                            //cells[4][y].setAvailable();
+                            //cells[5][y].setAvailable();
+                            cells[6][y].setAvailable();
+                            cells[7][y].setAvailable();
+                            cells[8][y].setAvailable();
+                            cells[9][y].setAvailable();
+                            cells[10][y].setAvailable();
+                            if(whichMap==1){
+                                maps.firstMap();
+                            }
+                           // if(whichMap==2){
+                           //     maps.secondMap();
+                           // }
+                            if(whichMap==3){
+                                maps.thirdMap();
+                            }
+                            if(whichMap==4){
+                                maps.fourthMap();
+                            }
+                            if(whichMap==5){
+                                maps.fifthMap();
+                            }
+                        }
+                    }
+                }else{
+                    var available_cnt = 0;
+                    for(x = 0;x < cells.length; x++){
+                        for(y = 0;y < cells[x].length; y++){
+                            if(this.player == 'first'){
+                                if(cells[x][y].status == CellStatus.FIRST){
+                                    if(this.checkAvailability(x,y)){
+                                        available_cnt++;
+                                    }
+                                }
+                            }else if(this.player == 'second'){
+                                if(cells[x][y].status == CellStatus.SECOND){
+                                    if(this.checkAvailability(x,y)){
+                                        available_cnt++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(available_cnt == 0) this.gameover();
+                }
+            };
+
+            Game.prototype.gameover = function(){
+                alert('Игрок ' + this.player + ' проиграл!');
+                window.location.reload();
+            };
+
+            Game.prototype.action = function(x,y){
+                if(cells[x][y].available){
+                    if(cells[x][y].status == CellStatus.EMPTY)
+                    {
+                        this.actionBorn(cells[x][y]);
+                    }else{
+                        this.actionAbsorb(cells[x][y]);
+                    }
+                    this.nextStep();
+                }
+            };
+
+            function fillField(dimension){
+                var $field = $('#field ul.cell');
+
+                for(var i=0; i<dimension; i++)
+                {
+                    for(var j=0; j<dimension;j++){
+                        var el = $('<li data-x="' + j + '" data-y="' + i + '"></li>');
+                        $field.append(el);
+                        var cell = new Cell();
+                        cell.element = el;
+                        if(typeof cells[j] === 'undefined') 
+                            cells[j] = [];
+                        cells[j][i] = cell;
+                    }
+                }
+            }
+
+                var game = new Game();
+
+                game.init();
+
+
+            $('#field ul.cell > li').click(function(){
+                var x = $(this).data('x');
+                var y = $(this).data('y');
+                game.action(x,y);
+            });
+
+        });
+
+        $(document).ready(function(){
+            PopUpHide();
+        });
+        function PopUpShow(){
+            $("#popup1").show();
+        }
+        function PopUpHide(){
+            $("#popup1").hide();
+        }
+    </script>
+</body>
+</html>
