@@ -166,41 +166,41 @@
         .container{
             margin:0px auto ;
             text-align:center;
+            
+        }
+        button{
+            outline:0!important;
         }
     </style>
 </head>
 <body>
     <div class="container">
   
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  >Open Rules</button>
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  >Open Rules</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Rules</h4>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Rules</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Virus – це гра для 2 та більше людей, де ви зможете показати свої вміння логічно мислити та прораховувати ходи.Гра представляє собою(можна сказати шахматну дошку або морський бій), але із зовсім іншим наповненням атмосфери. Кожен гравець обирає собі позицію і по черзі гравці ставлять по 3 хрестики свого кольору в будь-якому не зайнятому місці мапи. Коли всі гравці зробили 1 крок – починається сама гра. На кожен крок кожний гравець має поставити 3 хрестики(Ставити хрестик можна від будь-якого свого вже існуючого).Ціль гри – знищити усі хрестики твого суперника. Якщо ти під час свого ходу свій хрестик ставиш на хрестик суперника, то ця позиція стає назавжди твоєю(тобто це є немов би то башта[суперник втрачає цю клітинку])(з неї можна ходити, якщо з нею є зв'язок, тобто біля башти знаходиться твій хрестик,цю позицію не можна знищити або перехопити), як тільки зв'язок між баштами та хрестиками знищується можливість ходити з цих позицій зникає.
+                        Хай щастить!
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Играют в игру два игрока на доске n на n клеток, крестиками разных цветов.
-Ходят поочерёдно. Начинает первый игрок. Каждый ход состоит из трёх отдельных последовательных ходов (назовём их «ходиками»).
-Каждый «ходик» является либо размножением, либо убийством. Размножение — это выставление своего символа в любую доступную пустую клетку доски, а убийство — это объявление убитым некоторого чужого символа, который находится на доступной клетке.
-Клетка считается доступной для крестиков, если она либо непосредственно соприкасается (по вертикали, горизонтали) с живым крестиком, либо через цепочку убитых крестиков другого игрока(но не через цепочку убитых крестиков первого грока!).
-Аналогично определяются клетки, доступные для второго игрока.
-Убитые крестики 1 игрока закрашиваються цветом крестиков второго игрока.
-Целью игры является полное уничтожение колонии противника (то есть убить всех вражеских символов). Выигравшим считается игрок, сделавший последний ход; в таком варианте ничьей не существует.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
     </div>
-  </div>
   
 </div>
     
