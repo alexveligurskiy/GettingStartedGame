@@ -96,7 +96,7 @@
             width: 550px; 
             text-align: center;
             visibility: visible;
-
+            max-width:550px;
         }
         #player{
             color: black;
@@ -163,13 +163,17 @@
             position: absolute;
             background-color:darkkhaki;
         }
+        .container{
+            margin:0px auto ;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
   
   <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  >Open Rules</button>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -179,7 +183,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Rules</h4>
         </div>
         <div class="modal-body">
           <p>Играют в игру два игрока на доске n на n клеток, крестиками разных цветов.
