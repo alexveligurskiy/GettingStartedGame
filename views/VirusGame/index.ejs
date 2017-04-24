@@ -6,44 +6,10 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
-   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-        *{
-            font-family: Areal;
-        }
-        .b-container{
-            width:200px;
-            height:50px;
-            background-color: #ccc;
-            text-align: center;
-            margin:0px auto;
-            padding:0px;
-            border-radius:5px;
-            font-size:30px;
-            color: #fff;
-            box-shadow: 0px 0px 10px #000;
-        }
-        .b-popup{
-            width:100%;
-            min-height:100%;
-            background-color: rgba(0,0,0,0.5);
-            overflow:hidden;
-            position:fixed;
-            top:0px;
-        }
-        .b-popup .b-popup-content{
-            margin:40px auto 0px auto;
-            width:800px;
-            height: 200px;
-            padding:10px;
-            background-color: #c5c5c5;
-            border-radius:5px;
-            box-shadow: 0px 0px 10px #000;
-        }
         ul.cell {
             overflow: hidden;
             margin: 0;
@@ -201,7 +167,7 @@
 </head>
 <body>
     <div class="container">
-  <h2>Modal Example</h2>
+  
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
@@ -216,7 +182,13 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <p>Играют в игру два игрока на доске n на n клеток, крестиками разных цветов.
+Ходят поочерёдно. Начинает первый игрок. Каждый ход состоит из трёх отдельных последовательных ходов (назовём их «ходиками»).
+Каждый «ходик» является либо размножением, либо убийством. Размножение — это выставление своего символа в любую доступную пустую клетку доски, а убийство — это объявление убитым некоторого чужого символа, который находится на доступной клетке.
+Клетка считается доступной для крестиков, если она либо непосредственно соприкасается (по вертикали, горизонтали) с живым крестиком, либо через цепочку убитых крестиков другого игрока(но не через цепочку убитых крестиков первого грока!).
+Аналогично определяются клетки, доступные для второго игрока.
+Убитые крестики 1 игрока закрашиваються цветом крестиков второго игрока.
+Целью игры является полное уничтожение колонии противника (то есть убить всех вражеских символов). Выигравшим считается игрок, сделавший последний ход; в таком варианте ничьей не существует.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -227,22 +199,8 @@
   </div>
   
 </div>
-    <div class="b-container">Open
-        <a href="javascript:PopUpShow()">Rules</a>
-    </div>
-    <div class="b-popup" id="popup1">
-        <div class="b-popup-content">
-            Играют в игру два игрока на доске n на n клеток, крестиками разных цветов.
-Ходят поочерёдно. Начинает первый игрок. Каждый ход состоит из трёх отдельных последовательных ходов (назовём их «ходиками»).
-Каждый «ходик» является либо размножением, либо убийством. Размножение — это выставление своего символа в любую доступную пустую клетку доски, а убийство — это объявление убитым некоторого чужого символа, который находится на доступной клетке.
-Клетка считается доступной для крестиков, если она либо непосредственно соприкасается (по вертикали, горизонтали) с живым крестиком, либо через цепочку убитых крестиков другого игрока(но не через цепочку убитых крестиков первого грока!).
-Аналогично определяются клетки, доступные для второго игрока.
-Убитые крестики 1 игрока закрашиваються цветом крестиков второго игрока.
-Целью игры является полное уничтожение колонии противника (то есть убить всех вражеских символов). Выигравшим считается игрок, сделавший последний ход; в таком варианте ничьей не существует.
-
-        <a href="javascript:PopUpHide()">Close</a>
-        </div>
-    </div>
+    
+    
      <div id="field">   
         <h3>
             Round: <span id="turn">1</span> Steps left: <span id="steps_remains">3</span>
