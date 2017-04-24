@@ -312,14 +312,14 @@
     <script>
         
         $(function () {
-            function randomInteger(min, max) {
+           /* function randomInteger(min, max) {
             
                 var rand = min - 0.5 + Math.random() * (max - min + 1)
                     rand = Math.round(rand);
                 return rand;
                 
             }
-            var name = randomInteger(1,1000);
+            var name = randomInteger(1,1000);*/
             var socket = io();
             $('form').submit(function(){
                 socket.emit('chat message', $('#m').val());
