@@ -1,4 +1,6 @@
+## To watch it in work(not finished)
 
+https://gettingstartedgame.herokuapp.com/
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
